@@ -1,0 +1,227 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+pip-selfcheck.json
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+pythonenv*
+venv_*/
+.virtual_documents
+
+# Virtual Studio
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.vscode-server/
+
+# Virtual Environment
+venv/
+env/
+.virtualenvs/
+.virtualenv/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+*.launch
+.settings/
+
+# Project specific
+screenshots/actual/
+screenshots/expected/
+reports/diffs/
+reports/*.html
+reports/*.xml
+*.log
+test_results/
+allure-results/
+allure-report/
+htmlcov/
+.coverage
+.coverage.*
+.cache
+coverage.xml
+*.cover
+*.py,cover
+.pytest_cache/
+pytestdebug.log
+test-results/
+test-reports/
+screenshots/comparison/
+*.orig
+*.bak
+*.diff
+*.patch
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+*.db
+*.db-journal
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.lnk
+desktop.ini
+.vs/
+.vscode/
+.idea/
+
+# Selenium
+chromedriver*
+geckodriver*
+msedgedriver*
+iedriver*
+driver.log
+selenium.log
+webdriver.log
+chromedriver.log
+
+# Exceptions for baseline images
+!screenshots/expected/*.png
+!screenshots/expected/**/*.png
+!**/expected/*.png
+
+# Profiling
+*.prof
+*.stats
+
+# Translations
+*.mo
+*.pot
+
+# Flask stuff
+instance/
+.webassets-cache
+
+# Scrapy stuff
+.scrapy
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jython
+*.class
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Linux
+*~
+.directory
+*.pid
+*.lock
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
+
+# PyPI configuration
+.pypirc
+
+# Certificates
+*.pem
+*.crt
+*.key
+
+# Secret files
+*.secret
+*.secret.*
+secrets/
+secrets.yml
+secrets.yaml
+.secrets/
+*.env
+*.env.*
+!.env.example
