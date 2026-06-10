@@ -10,6 +10,12 @@ class Config:
     ACTUAL_DIR = SCREENSHOTS_DIR / 'actual'
     EXPECTED_DIR = SCREENSHOTS_DIR / 'expected'
     DIFF_DIR = BASE_DIR / 'reports' / 'diffs'
+    THESIS_COMPARE_HOME = '/home/slava/Documents/netology_ML/Diplom/'
+    THESIS_COMPARE_ACTUAL_DIR = THESIS_COMPARE_HOME + 'actual'
+    THESIS_COMPARE_ACTUAL_DIR_WITH_DELAY = THESIS_COMPARE_HOME + 'actual_with_1_sec_wait'
+    THESIS_COMPARE_TRUE = THESIS_COMPARE_HOME + 'compare_true'
+    THESIS_COMPARE_FALSE = THESIS_COMPARE_HOME + 'compare_false'
+    THESIS_COMPARE_DIFF = THESIS_COMPARE_HOME + 'compare_diff'
 
     # Browser settings
     BROWSER = 'chrome'
@@ -19,7 +25,7 @@ class Config:
     WEBDRIVER_PATH = '/home/slava/Documents/chrome_driver/chromedriver'
 
     # Image comparison settings
-    SIMILARITY_THRESHOLD = 0.95  # 95% similarity required
+    SIMILARITY_THRESHOLD = 1  # 95% similarity required
     PIXEL_DIFF_THRESHOLD = 0  # Count pixels with difference > 0
 
     @classmethod

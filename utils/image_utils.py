@@ -1,3 +1,6 @@
+import time
+from io import BytesIO
+
 import cv2
 import numpy as np
 from PIL import Image
@@ -25,6 +28,60 @@ class ImageUtils:
         driver.set_window_size(original_size['width'], original_size['height'])
 
         return screenshot
+
+
+    @staticmethod
+    def take_page_screenshot_parts(driver, name, overlap_percent=10):
+        """
+        Take multiple screenshots of the page during scrolling and return collection of images.
+
+        Args:
+            driver: WebDriver instance
+            name: base name for screenshots
+            overlap_percent: percentage of overlap between screenshots (to avoid missing content at borders)
+
+        Returns:
+            List of PIL Image objects
+        """
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        screenshot_parts = []
+
+        # Получаем высоту всей страницы и видимой области
+        total_height = driver.execute_script(
+            "return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight)")
+        viewport_height = driver.get_window_size()['height']
+
+        # Рассчитываем перекрытие
+        overlap_pixels = int(viewport_height * overlap_percent / 100)
+        step_height = viewport_height - overlap_pixels
+
+        current_position = 0
+        part_number = 1
+
+        while current_position < total_height:
+            # Прокручиваем к текущей позиции
+            driver.execute_script(f"window.scrollTo(0, {current_position})")
+
+            # Ждём стабилизации страницы
+            time.sleep(1.3)
+
+            # Делаем скриншот видимой области
+            screenshot_data = driver.get_screenshot_as_png()
+            screenshot = Image.open(BytesIO(screenshot_data))
+
+            # Добавляем метаданные о позиции
+            screenshot.info['scroll_position'] = current_position
+            screenshot.info['part_number'] = part_number
+            screenshot.info['timestamp'] = timestamp
+            screenshot.info['name'] = name
+
+            screenshot_parts.append(screenshot)
+
+            current_position += step_height
+            part_number += 1
+
+        return screenshot_parts
+
 
     @staticmethod
     def save_image(image_data, path):
