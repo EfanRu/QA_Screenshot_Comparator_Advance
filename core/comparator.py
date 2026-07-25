@@ -166,7 +166,7 @@ class ScreenshotComparator:
 
         Args:
             actual_dir: путь к папке с скриншотами без задержки
-            expected_dir: путь к папке со скриншотами с задержкой 1 сек
+            expected_dir: путь к папке со скриншотами с задержкой 1 сек
             diff_dir: папка для изображений разницы
         """
 
@@ -174,13 +174,13 @@ class ScreenshotComparator:
         Path(diff_dir).mkdir(parents=True, exist_ok=True)
 
         # Получаем списки файлов
-        expected_files = sorted([f for f in os.listdir(expected_dir) if f.endswith('.png')])
+        expected_files = sorted([f for f in os.listdir(expected_dir)])
 
         results = []
 
         for expected_file in expected_files:
             # Полные пути к файлам
-            actual_path = Path(actual_dir) / expected_file
+            actual_path = Path(actual_dir) / expected_file.replace('expected', 'actual')
             expected_path = Path(expected_dir) / expected_file
 
             # Загружаем изображения

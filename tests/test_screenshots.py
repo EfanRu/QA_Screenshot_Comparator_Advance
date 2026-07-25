@@ -1,4 +1,5 @@
 import time
+from time import sleep
 
 import pytest
 
@@ -75,9 +76,46 @@ class TestScreenshots:
 
     def test_compare_actual_with_hands_bugs(self, setup_api):
         self.comparator.compare_screenshots_from_paths(
-            '/home/slava/Documents/netology_ML/Diplom/bugs_expected',
-            '/home/slava/Documents/netology_ML/Diplom/bugs_actual',
-            '/home/slava/Documents/netology_ML/Diplom/bugs_diff')
+            '/home/slava/Documents/netology_ML/Diplom/not_bug_banners_expected',
+            '/home/slava/Documents/netology_ML/Diplom/not_bug_banners_actual',
+            '/home/slava/Documents/netology_ML/Diplom/not_bug_banners_diff')
+
+    def test_hands_save_screenshots(self, setup):
+        """For hands collect data set"""
+
+        self.driver.get("https://netology.ru")
+        home_path = "/home/slava/Documents/netology_ML/Diplom/"
+
+        # breakpoint there
+        expected_screenshot = self.driver.get_screenshot_as_png()
+
+        for i in range(1,10):
+            name = f"screen_11_{i}"
+            ImageUtils.save_image(expected_screenshot, f"{home_path}bugs_dynamic_elements_expected/expected_{name}")
+
+            sleep(1)
+            actual_screenshot = self.driver.get_screenshot_as_png()
+            ImageUtils.save_image(actual_screenshot, f"{home_path}bugs_dynamic_elements_actual/actual_{name}")
+
+
+    def test_save_page_by_parts_for_banners(self, setup):
+        """For hands collect data set"""
+
+        self.driver.get("https://netology.ru")
+        home_path = "/home/slava/Documents/netology_ML/Diplom/"
+        name = "6"
+        type_scr = "actual"
+        # type_scr = "expected"
+
+        # Take multiple screenshots of the page
+        screenshot_images = ImageUtils.take_page_screenshot_parts(self.driver, name)
+
+        for i, screenshot_img in enumerate(screenshot_images, start=1):
+            path = f"{home_path}/not_bug_banners_{type_scr}/not_bug_banners_{type_scr}_{name}_{i}.png"
+
+            cv_image = cv2.cvtColor(np.array(screenshot_img), cv2.COLOR_RGB2BGR)
+            ImageUtils.save_image(cv_image, path)
+
 
     def test_save_pages(self, setup):
         """Test for save pages screenshot for data set"""
@@ -173,7 +211,6 @@ class TestScreenshots:
         # Take multiple screenshots of the page
         screenshot_images = ImageUtils.take_page_screenshot_parts(self.driver, name)
 
-        saved_paths = []
         for i, screenshot_img in enumerate(screenshot_images, start=1):
             path = Config.ACTUAL_DIR / f"{name}_expected_with_1_sec_wait_{i}.png"
 
