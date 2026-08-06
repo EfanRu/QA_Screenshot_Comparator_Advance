@@ -76,34 +76,34 @@ class TestScreenshots:
 
     def test_compare_actual_with_hands_bugs(self, setup_api):
         self.comparator.compare_screenshots_from_paths(
-            '/home/slava/Documents/netology_ML/Diplom/not_bug_banners_expected_2_increase_ds',
-            '/home/slava/Documents/netology_ML/Diplom/not_bug_banners_actual_2_increase_ds',
-            '/home/slava/Documents/netology_ML/Diplom/not_bug_banners_diff_2_increase_ds')
+            '/home/slava/Documents/netology_ML/Diplom/bugs_expected_other_domain_shift',
+            '/home/slava/Documents/netology_ML/Diplom/bugs_actual_other_domain_shift',
+            '/home/slava/Documents/netology_ML/Diplom/bugs_diff_other_domain_shift')
+
 
     def test_hands_save_screenshots(self, setup):
         """For hands collect data set"""
 
-        self.driver.get("https://netology.ru")
+        self.driver.get("https://impulse.t1.ru/how-it-was")
         home_path = "/home/slava/Documents/netology_ML/Diplom/"
 
         # breakpoint there
-        expected_screenshot = self.driver.get_screenshot_as_png()
-
         for i in range(1,10):
-            name = f"screen_11_{i}"
-            ImageUtils.save_image(expected_screenshot, f"{home_path}bugs_dynamic_elements_expected/expected_{name}")
+            name = f"screen_2_{i}"
+            expected_screenshot = self.driver.get_screenshot_as_png()
+            ImageUtils.save_image(expected_screenshot, f"{home_path}no_bugs_expected_other_domain_dynamic/expected_{name}")
 
             sleep(1)
             actual_screenshot = self.driver.get_screenshot_as_png()
-            ImageUtils.save_image(actual_screenshot, f"{home_path}bugs_dynamic_elements_actual/actual_{name}")
+            ImageUtils.save_image(actual_screenshot, f"{home_path}no_bugs_actual_other_domain_dynamic/actual_{name}")
 
 
     def test_save_page_by_parts_for_banners(self, setup):
         """For hands collect data set"""
 
-        self.driver.get("https://netology.ru")
+        self.driver.get("https://career.t1.ru")
         home_path = "/home/slava/Documents/netology_ML/Diplom/"
-        name = "16"
+        name = "2"
         type_scr = "actual"
         # type_scr = "expected"
 
@@ -111,7 +111,7 @@ class TestScreenshots:
         screenshot_images = ImageUtils.take_page_screenshot_parts(self.driver, name)
 
         for i, screenshot_img in enumerate(screenshot_images, start=1):
-            path = f"{home_path}/not_bug_banners_{type_scr}_2_increase_ds/not_bug_banners_{type_scr}_{name}_{i}.png"
+            path = f"{home_path}/no_bugs_{type_scr}_other_domain_bunners/not_bug_banners_{type_scr}_{name}_{i}.png"
 
             cv_image = cv2.cvtColor(np.array(screenshot_img), cv2.COLOR_RGB2BGR)
             ImageUtils.save_image(cv_image, path)
@@ -121,66 +121,76 @@ class TestScreenshots:
         """Test for save pages screenshot for data set"""
 
         # Compare with baseline
-        self.save_page_by_parts("https://netology.ru", "netology_main")
-        self.save_page_by_parts("https://netology.ru/degree", "netology_degree")
-        self.save_page_by_parts("https://netology.ru/programs/sysadmin", "netology_sysadmin")
-        self.save_page_by_parts("https://netology.ru/programs/developer1c_ultimate", "netology_developer1c_ultimate")
-        self.save_page_by_parts("https://netology.ru/programs/graphic-design-ultimate",
-                                "netology_graphic-design-ultimate")
-        self.save_page_by_parts("https://netology.ru/programs/dizajner-intererov", "netology_dizajner-intererov")
-        self.save_page_by_parts("https://netology.ru/programs/specialist-po-iskusstvennomu-intellektu",
-                                "netology_specialist-po-iskusstvennomu-intellektu")
-        self.save_page_by_parts("https://netology.ru/programs/automation-engineer", "netology_automation-engineer")
-        self.save_page_by_parts("https://netology.ru/programs/python", "netology_python")
-        self.save_page_by_parts("https://netology.ru/programs/designer-communication",
-                                "netology_designer-communication")
-        self.save_page_by_parts("https://netology.ru/programs/fullstack-devops", "netology_fullstack-devops")
-        self.save_page_by_parts("https://netology.ru/programs/qa-middle", "netology_qa-middle")
-        self.save_page_by_parts("https://netology.ru/programs/informationsecurity", "netology_informationsecurity")
-        self.save_page_by_parts("https://netology.ru/programs/1c-analitik-s-nulya-do-middle",
-                                "netology_1c-analitik-s-nulya-do-middle")
-        self.save_page_by_parts("https://netology.ru/programs/fullstack-python-dev", "netology_fullstack-python-dev")
-        self.save_page_by_parts("https://netology.ru/programs/accountant", "netology_accountant")
-        self.save_page_by_parts("https://netology.ru/programs/analytics-dwh", "netology_analytics-dwh")
-        self.save_page_by_parts("https://netology.ru/programs/professiya-menezher-marketplejsov",
-                                "netology_professiya-menezher-marketplejsov")
-        self.save_page_by_parts("https://netology.ru/programs/hr-manager", "netology_hr-manager")
-        self.save_page_by_parts("https://netology.ru/programs/menedger-marketplace", "netology_menedger-marketplace")
-        self.save_page_by_parts("https://netology.ru/programs/nutritionist", "netology_nutritionist")
-        self.save_page_by_parts("https://netology.ru/programs/data_analyst_ultimate", "netology_data_analyst_ultimate")
-        self.save_page_by_parts("https://netology.ru/programs/product-ultimate", "netology_product-ultimate")
-        self.save_page_by_parts("https://netology.ru/programs/web-designer", "netology_web-designer")
-        self.save_page_by_parts("https://netology.ru/programs/landshaftnyj-dizajner-ultimate",
-                                "netology_landshaftnyj-dizajner-ultimate")
-        self.save_page_by_parts("https://netology.ru/programs/illustration-ultimate", "netology_illustration-ultimate")
-        self.save_page_by_parts("https://netology.ru/programs/menedzher-avito", "netology_menedzher-avito")
-        self.save_page_by_parts("https://netology.ru/programs/product-design", "netology_product-design")
-        self.save_page_by_parts("https://netology.ru/programs/devops", "netology_devops")
-        self.save_page_by_parts("https://netology.ru/programs/professiya-psykholog", "netology_professiya-psykholog")
-        self.save_page_by_parts("https://netology.ru/programs/distance-course-internet-marketing",
-                                "netology_distance-course-internet-marketing")
-        self.save_page_by_parts("https://netology.ru/programs/senior-internet-marketer",
-                                "netology_senior-internet-marketer")
-        self.save_page_by_parts("https://netology.ru/programs/prodatascience", "netology_prodatascience")
-        self.save_page_by_parts("https://netology.ru/programs/biohaking", "netology_biohaking")
-        self.save_page_by_parts("https://netology.ru/programs/network-engineer", "netology_network-engineer")
-        self.save_page_by_parts("https://netology.ru/programs/scenarnoye-masterstvo", "netology_")
-        self.save_page_by_parts("https://netology.ru/programs/professiya_financial_analyst", "netology_")
-        self.save_page_by_parts("https://netology.ru/programs/metodolog-obrazovatelnyh-programm-sinhron", "netology_")
-        self.save_page_by_parts("https://netology.ru/programs/qa", "netology_")
-        self.save_page_by_parts("https://netology.ru/programs/gamedesigner", "netology_")
-        self.save_page_by_parts("https://netology.ru/programs/java-developer", "netology_")
-        self.save_page_by_parts("https://netology.ru/programs/unity-developer", "netology_")
-        self.save_page_by_parts("https://netology.ru/programs/target-smm-full", "netology_")
-        self.save_page_by_parts("https://netology.ru/programs/developer1c", "netology_")
-        self.save_page_by_parts("https://netology.ru/programs/data-scientist", "netology_")
-        self.save_page_by_parts("https://netology.ru/programs/dizayn_sredy", "netology_")
-        self.save_page_by_parts("https://netology.ru/programs/video-editing", "netology_")
-        self.save_page_by_parts("https://netology.ru/programs/systems-analyst", "netology_")
-        self.save_page_by_parts(
-            "https://netology.ru/programs/veb-razrabotchik-s-nulya-professiya-s-vyborom-specializacii", "netology_")
-        self.save_page_by_parts("https://netology.ru/programs/business-analytics-online", "netology_")
-        self.save_page_by_parts("https://netology.ru/programs/sales-manager-online", "netology_")
+        # self.save_page_by_parts("https://t1.ru/impulse", "impulse_main")
+        # self.save_page_by_parts("https://t1.ru/media/press-kit", "press-kit")
+        # self.save_page_by_parts("https://t1.ru/cases", "cases")
+        # self.save_page_by_parts("https://t1.ru/products/industries/finance", "products_industries_finance")
+        # self.save_page_by_parts("https://t1.ru/partners", "partners")
+        self.save_page_by_parts("https://career.t1.ru/", "career")
+        self.save_page_by_parts("https://career.t1.ru/vacancies?", "vacancies")
+        self.save_page_by_parts("https://career.t1.ru/teams", "teams")
+        self.save_page_by_parts("https://career.t1.ru/debut", "debut")
+        self.save_page_by_parts("https://pro.t1.ru/", "pro")
+        # self.save_page_by_parts("https://netology.ru", "netology_main")
+        # self.save_page_by_parts("https://netology.ru/degree", "netology_degree")
+        # self.save_page_by_parts("https://netology.ru/programs/sysadmin", "netology_sysadmin")
+        # self.save_page_by_parts("https://netology.ru/programs/developer1c_ultimate", "netology_developer1c_ultimate")
+        # self.save_page_by_parts("https://netology.ru/programs/graphic-design-ultimate",
+        #                         "netology_graphic-design-ultimate")
+        # self.save_page_by_parts("https://netology.ru/programs/dizajner-intererov", "netology_dizajner-intererov")
+        # self.save_page_by_parts("https://netology.ru/programs/specialist-po-iskusstvennomu-intellektu",
+        #                         "netology_specialist-po-iskusstvennomu-intellektu")
+        # self.save_page_by_parts("https://netology.ru/programs/automation-engineer", "netology_automation-engineer")
+        # self.save_page_by_parts("https://netology.ru/programs/python", "netology_python")
+        # self.save_page_by_parts("https://netology.ru/programs/designer-communication",
+        #                         "netology_designer-communication")
+        # self.save_page_by_parts("https://netology.ru/programs/fullstack-devops", "netology_fullstack-devops")
+        # self.save_page_by_parts("https://netology.ru/programs/qa-middle", "netology_qa-middle")
+        # self.save_page_by_parts("https://netology.ru/programs/informationsecurity", "netology_informationsecurity")
+        # self.save_page_by_parts("https://netology.ru/programs/1c-analitik-s-nulya-do-middle",
+        #                         "netology_1c-analitik-s-nulya-do-middle")
+        # self.save_page_by_parts("https://netology.ru/programs/fullstack-python-dev", "netology_fullstack-python-dev")
+        # self.save_page_by_parts("https://netology.ru/programs/accountant", "netology_accountant")
+        # self.save_page_by_parts("https://netology.ru/programs/analytics-dwh", "netology_analytics-dwh")
+        # self.save_page_by_parts("https://netology.ru/programs/professiya-menezher-marketplejsov",
+        #                         "netology_professiya-menezher-marketplejsov")
+        # self.save_page_by_parts("https://netology.ru/programs/hr-manager", "netology_hr-manager")
+        # self.save_page_by_parts("https://netology.ru/programs/menedger-marketplace", "netology_menedger-marketplace")
+        # self.save_page_by_parts("https://netology.ru/programs/nutritionist", "netology_nutritionist")
+        # self.save_page_by_parts("https://netology.ru/programs/data_analyst_ultimate", "netology_data_analyst_ultimate")
+        # self.save_page_by_parts("https://netology.ru/programs/product-ultimate", "netology_product-ultimate")
+        # self.save_page_by_parts("https://netology.ru/programs/web-designer", "netology_web-designer")
+        # self.save_page_by_parts("https://netology.ru/programs/landshaftnyj-dizajner-ultimate",
+        #                         "netology_landshaftnyj-dizajner-ultimate")
+        # self.save_page_by_parts("https://netology.ru/programs/illustration-ultimate", "netology_illustration-ultimate")
+        # self.save_page_by_parts("https://netology.ru/programs/menedzher-avito", "netology_menedzher-avito")
+        # self.save_page_by_parts("https://netology.ru/programs/product-design", "netology_product-design")
+        # self.save_page_by_parts("https://netology.ru/programs/devops", "netology_devops")
+        # self.save_page_by_parts("https://netology.ru/programs/professiya-psykholog", "netology_professiya-psykholog")
+        # self.save_page_by_parts("https://netology.ru/programs/distance-course-internet-marketing",
+        #                         "netology_distance-course-internet-marketing")
+        # self.save_page_by_parts("https://netology.ru/programs/senior-internet-marketer",
+        #                         "netology_senior-internet-marketer")
+        # self.save_page_by_parts("https://netology.ru/programs/prodatascience", "netology_prodatascience")
+        # self.save_page_by_parts("https://netology.ru/programs/biohaking", "netology_biohaking")
+        # self.save_page_by_parts("https://netology.ru/programs/network-engineer", "netology_network-engineer")
+        # self.save_page_by_parts("https://netology.ru/programs/scenarnoye-masterstvo", "netology_")
+        # self.save_page_by_parts("https://netology.ru/programs/professiya_financial_analyst", "netology_")
+        # self.save_page_by_parts("https://netology.ru/programs/metodolog-obrazovatelnyh-programm-sinhron", "netology_")
+        # self.save_page_by_parts("https://netology.ru/programs/qa", "netology_")
+        # self.save_page_by_parts("https://netology.ru/programs/gamedesigner", "netology_")
+        # self.save_page_by_parts("https://netology.ru/programs/java-developer", "netology_")
+        # self.save_page_by_parts("https://netology.ru/programs/unity-developer", "netology_")
+        # self.save_page_by_parts("https://netology.ru/programs/target-smm-full", "netology_")
+        # self.save_page_by_parts("https://netology.ru/programs/developer1c", "netology_")
+        # self.save_page_by_parts("https://netology.ru/programs/data-scientist", "netology_")
+        # self.save_page_by_parts("https://netology.ru/programs/dizayn_sredy", "netology_")
+        # self.save_page_by_parts("https://netology.ru/programs/video-editing", "netology_")
+        # self.save_page_by_parts("https://netology.ru/programs/systems-analyst", "netology_")
+        # self.save_page_by_parts(
+        #     "https://netology.ru/programs/veb-razrabotchik-s-nulya-professiya-s-vyborom-specializacii", "netology_")
+        # self.save_page_by_parts("https://netology.ru/programs/business-analytics-online", "netology_")
+        # self.save_page_by_parts("https://netology.ru/programs/sales-manager-online", "netology_")
 
     def save_page(self, url, name):
         self.driver.get(url)
