@@ -72,7 +72,8 @@ class TestScreenshots:
             f"Screenshot comparison failed: {result['message']}"
 
     def test_compare_actual_with_actual_with_wait_for_dynamic_elements(self, setup_api):
-        self.comparator.compare_and_sort_screenshots_for_thesis()
+        """Compare saved screen with sort for find bugs"""
+        self.comparator.compare_and_sort_screenshots_for_thesis(False)
 
     def test_compare_actual_with_hands_bugs(self, setup_api):
         self.comparator.compare_screenshots_from_paths(
@@ -121,16 +122,20 @@ class TestScreenshots:
         """Test for save pages screenshot for data set"""
 
         # Compare with baseline
-        # self.save_page_by_parts("https://t1.ru/impulse", "impulse_main")
-        # self.save_page_by_parts("https://t1.ru/media/press-kit", "press-kit")
-        # self.save_page_by_parts("https://t1.ru/cases", "cases")
-        # self.save_page_by_parts("https://t1.ru/products/industries/finance", "products_industries_finance")
-        # self.save_page_by_parts("https://t1.ru/partners", "partners")
+
+        # t1
         self.save_page_by_parts("https://career.t1.ru/", "career")
         self.save_page_by_parts("https://career.t1.ru/vacancies?", "vacancies")
         self.save_page_by_parts("https://career.t1.ru/teams", "teams")
         self.save_page_by_parts("https://career.t1.ru/debut", "debut")
         self.save_page_by_parts("https://pro.t1.ru/", "pro")
+
+        # Netology
+        # self.save_page_by_parts("https://t1.ru/impulse", "impulse_main")
+        # self.save_page_by_parts("https://t1.ru/media/press-kit", "press-kit")
+        # self.save_page_by_parts("https://t1.ru/cases", "cases")
+        # self.save_page_by_parts("https://t1.ru/products/industries/finance", "products_industries_finance")
+        # self.save_page_by_parts("https://t1.ru/partners", "partners")
         # self.save_page_by_parts("https://netology.ru", "netology_main")
         # self.save_page_by_parts("https://netology.ru/degree", "netology_degree")
         # self.save_page_by_parts("https://netology.ru/programs/sysadmin", "netology_sysadmin")

@@ -74,16 +74,17 @@ class ScreenshotComparator:
         return result
 
 
-    def compare_and_sort_screenshots_for_thesis(self):
+    def compare_and_sort_screenshots_for_thesis(self, is_ml_bug_enabled=False):
         """
         Сравнивает скриншоты попарно и сортирует их по папкам.
 
         Args:
             actual_dir: путь к папке с скриншотами без задержки
-            expected_dir: путь к папке со скриншотами с задержкой 1 сек
+            expected_dir: путь к папке со скриншотами с задержкой 1 сек
             compare_true_dir: папка для совпадающих скриншотов
             compare_false_dir: папка для различающихся скриншотов
             diff_dir: папка для изображений разницы
+            :param is_ml_bug_enabled: Включить ML анализ нестабильных скриншотов
         """
         expected_dir = Config.THESIS_COMPARE_ACTUAL_DIR
         actual_dir = Config.THESIS_COMPARE_ACTUAL_DIR_WITH_DELAY
@@ -124,7 +125,7 @@ class ScreenshotComparator:
 
             # Сравниваем изображения
             are_similar, diff_image, diff_percent, diff_pixels = ImageUtils.compare_images(
-                actual_image, expected_image
+                actual_image, expected_image, is_ml_bug_enabled
             )
 
             # Сохраняем изображение разницы, если не похожи
